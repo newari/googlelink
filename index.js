@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     access_type: 'offline',
     scope: SCOPES,
   });
-  res.send(`<a href="${authUrl}">Authorize app</a>`);
+  res.send(`<a href="${authUrl}">Authorize app with Google ${process.env["SAMPLEVAR"]}</a>`);
 });
 
 app.get('/oauth2callback', async (req, res) => {
