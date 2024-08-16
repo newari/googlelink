@@ -5,9 +5,9 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 const oauth2Client = new google.auth.OAuth2(
-  '${process.env["GOOGLE_CLIENT_ID"]}',
-  '${process.env["GOOGLE_CLIENT_SECRET"]}',
-  'http://localhost:3000/oauth2callback'
+  process.env["GOOGLE_CLIENT_ID"],
+  process.env["GOOGLE_CLIENT_SECRET"],
+  process.env["GOOGLE_AUTH_CALLBACK"]
 );
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/spreadsheets'];
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     access_type: 'offline',
     scope: SCOPES,
   });
-  res.send(`<a href="${authUrl}">Authorize app with Google ${process.env["SAMPLEVAR"]}</a>`);
+  res.send(`<a href="${authUrl}">Authorize app with Google</a>`);
 });
 
 app.get('/oauth2callback', async (req, res) => {
